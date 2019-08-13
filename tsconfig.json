@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "outDir": "dist",
+        "rootDir": "src",
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "declaration": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "sourceMap": true
+    },
+    "exclude": ["**/__tests__", "dist"]
+}

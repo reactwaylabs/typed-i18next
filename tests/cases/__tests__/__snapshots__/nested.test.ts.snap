@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nested 1`] = `
+"export interface Translations {
+    keys: {
+        \\"item\\": \\"title\\" | \\"footer\\",
+        \\"item.content\\": \\"desc\\" | \\"example\\"
+    };
+    keysWithNS: {
+        \\"item\\": \\"item.title\\" | \\"item.footer\\",
+        \\"item.content\\": \\"item.content.desc\\" | \\"item.content.example\\"
+    };
+}
+"
+`;

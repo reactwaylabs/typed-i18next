@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple 1`] = `
+"export interface Translations {
+    keys: {
+        \\"shoes\\": \\"snkeakers\\" | \\"high-heels\\",
+        \\"tops\\": \\"jacket\\" | \\"t-shirt\\" | \\"sweater\\",
+        \\"smth.authentication\\": \\"login\\" | \\"register\\"
+    };
+    keysWithNS: {
+        \\"shoes\\": \\"shoes.snkeakers\\" | \\"shoes.high-heels\\",
+        \\"tops\\": \\"tops.jacket\\" | \\"tops.t-shirt\\" | \\"tops.sweater\\",
+        \\"smth.authentication\\": \\"smth.authentication.login\\" | \\"smth.authentication.register\\"
+    };
+}
+"
+`;
