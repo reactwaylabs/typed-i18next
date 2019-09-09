@@ -25,8 +25,8 @@ async function main(argv: string[]): Promise<void> {
     }
 
     if (cliOptions.check) {
-        if (await checkGeneratedFiles({ inputLocation: cliOptions.input, outputLocation: cliOptions.outputFile })) {
-            Log.info("Check was succesfull.");
+        if (await checkGeneratedFiles({ inputLocation: cliOptions.input, outputLocation: cliOptions.outputFile, allowMissingTranslations: false })) {
+            Log.info("Check was successful.");
         } else {
             Log.error("Generated types are not up-to-date.");
             process.exit(1);
@@ -44,7 +44,7 @@ async function main(argv: string[]): Promise<void> {
             return;
         }
 
-        Log.info("Succesfully generated types.");
+        Log.info("Successfully generated types.");
     }
 }
 
