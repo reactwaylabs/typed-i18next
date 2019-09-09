@@ -24,7 +24,14 @@ export async function generateTypesFile({
     const combinedKeys = combineKeys(languages);
 
     if (!allowMissingTranslations && combinedKeys.missingTranslationKeys.length > 0) {
+        for (const missingKey of combinedKeys.missingTranslationKeys) {
+            Log.error(`Missing translation "${missingKey.translationKey}" key in "${missingKey.language}".`);
+        }
         throw new MissingTranslationsError(combinedKeys.missingTranslationKeys);
+    } else {
+        for (const missingKey of combinedKeys.missingTranslationKeys) {
+            Log.warn(`Missing translation "${missingKey.translationKey}" key in "${missingKey.language}".`);
+        }
     }
 
     let header: string;
@@ -42,10 +49,11 @@ export interface CheckGeneratedFilesOptions {
     inputLocation: string;
     outputLocation: string;
     noEmitHeader?: boolean;
+    allowMissingTranslations?: boolean;
 }
 
-export async function checkGeneratedFiles({ inputLocation, outputLocation, noEmitHeader }: CheckGeneratedFilesOptions): Promise<boolean> {
-    const generatedFile = await generateTypesFile({ inputLocation: inputLocation, noEmitHeader: noEmitHeader });
+export async function checkGeneratedFiles({ inputLocation, outputLocation, noEmitHeader, allowMissingTranslations }: CheckGeneratedFilesOptions): Promise<boolean> {
+    const generatedFile = await generateTypesFile({ inputLocation: inputLocation, noEmitHeader: noEmitHeader, allowMissingTranslations });
     const outputFile = await fs.readFile(outputLocation, "utf8");
 
     return generatedFile === outputFile;
