@@ -22,6 +22,9 @@
         "!*.config.js",
         "!dist/_debug*"
     ],
+    "bin": {
+        "typed-i18next": "dist/cli/main.js"
+    },
     "devDependencies": {
         "@reactway/eslint-config": "^1.0.0-alpha",
         "@simplrjs/test-generator-cli": "^0.1.3",
