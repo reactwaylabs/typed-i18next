@@ -5,17 +5,27 @@ import { resolveLanguagesKeys } from "./resolve-languages-keys";
 import { combineKeys } from "./combine-keys";
 import { generateTypes } from "./generate-types";
 import { Log } from "./cli/logging";
+import { MissingTranslationsError } from "./errors";
 
 export interface GenerateTypesFileOptions {
     inputLocation: string;
     noEmitHeader?: boolean;
+    allowMissingTranslations?: boolean;
 }
 
-export async function generateTypesFile({ inputLocation, noEmitHeader = false }: GenerateTypesFileOptions): Promise<string> {
+export async function generateTypesFile({
+    inputLocation,
+    noEmitHeader = false,
+    allowMissingTranslations = true
+}: GenerateTypesFileOptions): Promise<string> {
     const languages = await resolveLanguagesKeys(inputLocation);
     Log.info(`Resolved ${languages.length} languages.`);
     Log.debug(`Languages: ${JSON.stringify(languages.map(x => x.language))}.`);
     const combinedKeys = combineKeys(languages);
+
+    if (!allowMissingTranslations && combinedKeys.missingTranslationKeys.length > 0) {
+        throw new MissingTranslationsError(combinedKeys.missingTranslationKeys);
+    }
 
     let header: string;
     if (noEmitHeader) {
