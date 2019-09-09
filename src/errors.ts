@@ -1,15 +1,9 @@
 import { MissingKey } from "./contracts";
 
 export class MissingTranslationsError extends Error {
-    constructor(keys: MissingKey[]) {
+    constructor(public readonly missingTranslationKeys: MissingKey[]) {
         super("Not all translations are present. Check log for missing translation keys.");
 
-        this._missingTranslationKeys = keys;
-    }
-
-    private _missingTranslationKeys: MissingKey[] = [];
-
-    public get missingTranslationKeys(): MissingKey[] {
-        return this._missingTranslationKeys;
+        this.missingTranslationKeys = missingTranslationKeys;
     }
 }
