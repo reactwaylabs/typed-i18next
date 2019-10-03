@@ -25,6 +25,14 @@
     "bin": {
         "typed-i18next": "dist/cli/main.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/reactway/typed-i18next.git"
+    },
+    "bugs": {
+        "url": "https://github.com/reactway/typed-i18next/issues"
+    },
+    "homepage": "https://github.com/reactway/typed-i18next#readme",
     "devDependencies": {
         "@reactway/eslint-config": "^1.0.0-alpha",
         "@simplrjs/test-generator-cli": "^0.1.3",
