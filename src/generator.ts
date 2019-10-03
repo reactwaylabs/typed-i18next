@@ -1,4 +1,3 @@
-import os from "os";
 import fs from "fs-extra";
 
 import { resolveLanguagesKeys } from "./resolve-languages-keys";
@@ -38,7 +37,7 @@ export async function generateTypesFile({
     if (noEmitHeader) {
         header = "";
     } else {
-        header = `// DO NOT EDIT! This file is generated with "typed-18next" tool.${os.EOL}${os.EOL}`;
+        header = `// DO NOT EDIT! This file is generated with "typed-18next" tool.\n\n`;
     }
 
     const typesFile = generateTypes(combinedKeys.translationKeys);
