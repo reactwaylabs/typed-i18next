@@ -6,23 +6,23 @@ export function combineKeys(languages: LanguageTranslations[]): CombinedKeysResu
         translationKeys: [],
         missingTranslationKeys: []
     };
-    const check: { [key: string]: string[] | undefined } = {};
+    const languagesByTranslationKey: { [translationKey: string]: string[] | undefined } = {};
 
     for (const { language, translationKeys } of languages) {
-        for (const key of translationKeys) {
-            if (check[key] == null) {
-                check[key] = [];
-                result.translationKeys.push(key);
+        for (const translationKey of translationKeys) {
+            if (languagesByTranslationKey[translationKey] == null) {
+                languagesByTranslationKey[translationKey] = [];
+                result.translationKeys.push(translationKey);
             }
 
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            check[key]!.push(language);
+            languagesByTranslationKey[translationKey]!.push(language);
         }
     }
 
-    result.missingTranslationKeys = Object.keys(check)
+    result.missingTranslationKeys = Object.keys(languagesByTranslationKey)
         .map(translationKey => {
-            const resolvedLanguages = check[translationKey];
+            const resolvedLanguages = languagesByTranslationKey[translationKey];
             if (resolvedLanguages == null) {
                 return undefined;
             }
@@ -31,9 +31,10 @@ export function combineKeys(languages: LanguageTranslations[]): CombinedKeysResu
                 return undefined;
             }
 
-            return languagesList
-                .filter(language => resolvedLanguages.indexOf(language) === -1)
-                .map<MissingKey>(language => ({ language: language, translationKey: translationKey }));
+            const languagesMissingKey = languagesList.filter(language => resolvedLanguages.indexOf(language) === -1);
+            const missingKeys = languagesMissingKey.map<MissingKey>(language => ({ language: language, translationKey: translationKey }));
+
+            return missingKeys;
         })
         .filter((x): x is MissingKey[] => x != null)
         .reduce((prevValue, value) => prevValue.concat(value), []);
