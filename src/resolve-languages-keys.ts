@@ -30,9 +30,9 @@ export async function resolveLanguageTranslations(langName: string, location: st
         fileList.map<Promise<string[]>>(async fileName => {
             const namespaceName = path.removeExt(fileName, path.extname(fileName));
             const fileContent = await fs.readJson(path.join(location, fileName));
-            const keys = resolveTranslationKeys(fileContent);
+            const namespaceKeys = resolveTranslationKeys(fileContent);
 
-            return keys.map(x => `${namespaceName}${NAMESPACE_SEPARATOR}${x}`);
+            return namespaceKeys.map(x => `${namespaceName}${NAMESPACE_SEPARATOR}${x}`);
         })
     ))
         .reduce((prev, curr) => prev.concat(curr), [])
