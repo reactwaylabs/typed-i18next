@@ -4,11 +4,13 @@ exports[`simple 1`] = `
 "export interface Translations {
     keys: {
         \\"shoes\\": \\"sneakers\\" | \\"high-heels\\",
-        \\"tops\\": \\"jacket\\" | \\"t-shirt\\" | \\"sweater\\"
+        \\"tops\\": \\"jacket\\" | \\"t-shirt\\" | \\"sweater\\",
+        \\"pages/login\\": \\"fields.username-label\\" | \\"fields.password-label\\"
     };
     keysWithNS: {
-        \\"shoes\\": \\"shoes.sneakers\\" | \\"shoes.high-heels\\",
-        \\"tops\\": \\"tops.jacket\\" | \\"tops.t-shirt\\" | \\"tops.sweater\\"
+        \\"shoes\\": \\"shoes:sneakers\\" | \\"shoes:high-heels\\",
+        \\"tops\\": \\"tops:jacket\\" | \\"tops:t-shirt\\" | \\"tops:sweater\\",
+        \\"pages/login\\": \\"pages/login:fields.username-label\\" | \\"pages/login:fields.password-label\\"
     };
 }
 "

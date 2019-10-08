@@ -3,51 +3,64 @@ import path from "upath";
 
 import { getListFilesRecursively, getListOfDirectories } from "./helpers";
 import { LanguageTranslations } from "./contracts";
-import { KEY_SEPARATOR } from "./constants";
+import { KEY_SEPARATOR, NAMESPACE_SEPARATOR } from "./constants";
 
-type Dict = { [key: string]: string | Dict };
+type NestedDictionary = { [key: string]: string | NestedDictionary };
 
-export function resolveTranslationKeys(obj: Dict): string[] {
+export function resolveTranslationKeys(translationsObject: NestedDictionary): string[] {
     let result: string[] = [];
 
-    for (const objKey of Object.keys(obj)) {
-        const value = obj[objKey];
+    for (const currentKey of Object.keys(translationsObject)) {
+        const currentTranslation = translationsObject[currentKey];
 
-        if (typeof value === "object") {
-            result = result.concat(resolveTranslationKeys(value).map(namespacesWithKey => `${objKey}${KEY_SEPARATOR}${namespacesWithKey}`));
-        } else if (typeof value === "string") {
-            result.push(objKey);
+        // If there is an inner object
+        if (typeof currentTranslation === "object") {
+            // Resolve its keys
+            const scope = currentKey;
+            const scopeKeys = resolveTranslationKeys(currentTranslation);
+
+            // And build the key
+            const scopedKeys = scopeKeys.map(innerKey => `${scope}${KEY_SEPARATOR}${innerKey}`);
+
+            result = result.concat(scopedKeys);
+        } else if (typeof currentTranslation === "string") {
+            // Just push the the string value.
+            result.push(currentKey);
         }
     }
 
     return result;
 }
 
-export async function resolveFileKeys(rootDir: string, location: string): Promise<string[]> {
-    const data = await fs.readJson(path.join(rootDir, location));
-    const folderNamespacesList = path
-        .dirname(location)
-        .split(path.sep)
-        .filter(x => x !== ".");
-    const fileName = path.basename(location, path.extname(location));
+export async function resolveLanguageTranslations(language: string, location: string): Promise<LanguageTranslations> {
+    // Gather all translation files.
+    const translationsFilesAbsolute = await getListFilesRecursively(location);
 
-    const resolvedDataKeys = resolveTranslationKeys(data);
-    const folderNamespace = folderNamespacesList.length > 0 ? `${folderNamespacesList.join(KEY_SEPARATOR)}${KEY_SEPARATOR}` : "";
-    const result: string[] = resolvedDataKeys.map(namespacesWithKey => `${folderNamespace}${fileName}${KEY_SEPARATOR}${namespacesWithKey}`);
+    // Convert paths from absolute to relative (Unix style).
+    const translationsFiles = translationsFilesAbsolute.map(x => path.toUnix(path.relative(location, x)));
 
-    return result;
-}
+    // Gather promises for translation keys.
+    const translationKeysPromises = translationsFiles.map(fileName => extractTranslationsFromFile(fileName, location));
+    const translationKeys = await Promise.all(translationKeysPromises);
 
-export async function resolveLanguageTranslations(langName: string, location: string): Promise<LanguageTranslations> {
-    const fileList = (await getListFilesRecursively(location)).map(x => path.relative(location, x));
-    const keys = (await Promise.all(fileList.map(x => resolveFileKeys(location, x))))
-        .reduce((prev, curr) => prev.concat(curr), [])
-        .filter(x => x.length !== 0);
+    // Flatten and filter out empty arrays.
+    const flatNamespacesKeys = translationKeys.reduce((prev, curr) => prev.concat(curr), []).filter(x => x.length !== 0);
 
     return {
-        language: langName,
-        translationKeys: keys
+        language: language,
+        translationKeys: flatNamespacesKeys
     };
+}
+
+export async function extractTranslationsFromFile(fileName: string, location: string): Promise<string[]> {
+    // Resolve translations namespace name.
+    const namespaceName = path.removeExt(fileName, path.extname(fileName));
+
+    const fileContent = await fs.readJson(path.join(location, fileName));
+
+    const namespaceKeys = resolveTranslationKeys(fileContent);
+
+    return namespaceKeys.map(translationKey => `${namespaceName}${NAMESPACE_SEPARATOR}${translationKey}`);
 }
 
 export async function resolveLanguagesKeys(inputPath: string): Promise<LanguageTranslations[]> {
