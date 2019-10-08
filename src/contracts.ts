@@ -3,7 +3,7 @@ export interface LanguageTranslations {
     translationKeys: string[];
 }
 
-export interface CombineKeysResult {
+export interface CombinedKeysResult {
     translationKeys: string[];
     missingTranslationKeys: MissingKey[];
 }

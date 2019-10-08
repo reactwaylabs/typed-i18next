@@ -1,8 +1,8 @@
-import { LanguageTranslations, CombineKeysResult, MissingKey } from "./contracts";
+import { LanguageTranslations, CombinedKeysResult, MissingKey } from "./contracts";
 
-export function combineKeys(languages: LanguageTranslations[]): CombineKeysResult {
+export function combineKeys(languages: LanguageTranslations[]): CombinedKeysResult {
     const languagesList = languages.map(x => x.language);
-    const result: CombineKeysResult = {
+    const result: CombinedKeysResult = {
         translationKeys: [],
         missingTranslationKeys: []
     };
