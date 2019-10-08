@@ -3,10 +3,10 @@
 exports[`nested 1`] = `
 "export interface Translations {
     keys: {
-        \\"item\\": \\"title\\" | \\"content.desc\\" | \\"content.example\\" | \\"footer\\"
+        \\"item\\": \\"title\\" | \\"content.desc\\" | \\"content.example\\" | \\"content.another.key\\" | \\"footer\\"
     };
     keysWithNS: {
-        \\"item\\": \\"item:title\\" | \\"item:content.desc\\" | \\"item:content.example\\" | \\"item:footer\\"
+        \\"item\\": \\"item:title\\" | \\"item:content.desc\\" | \\"item:content.example\\" | \\"item:content.another.key\\" | \\"item:footer\\"
     };
 }
 "

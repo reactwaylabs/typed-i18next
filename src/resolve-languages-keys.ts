@@ -5,18 +5,27 @@ import { getListFilesRecursively, getListOfDirectories } from "./helpers";
 import { LanguageTranslations } from "./contracts";
 import { KEY_SEPARATOR, NAMESPACE_SEPARATOR } from "./constants";
 
-type Dict = { [key: string]: string | Dict };
+type NestedDictionary = { [key: string]: string | NestedDictionary };
 
-export function resolveTranslationKeys(obj: Dict): string[] {
+export function resolveTranslationKeys(translationsObject: NestedDictionary): string[] {
     let result: string[] = [];
 
-    for (const objKey of Object.keys(obj)) {
-        const value = obj[objKey];
+    for (const currentKey of Object.keys(translationsObject)) {
+        const currentTranslation = translationsObject[currentKey];
 
-        if (typeof value === "object") {
-            result = result.concat(resolveTranslationKeys(value).map(namespacesWithKey => `${objKey}${KEY_SEPARATOR}${namespacesWithKey}`));
-        } else if (typeof value === "string") {
-            result.push(objKey);
+        // If there is an inner object
+        if (typeof currentTranslation === "object") {
+            // Resolve its keys
+            const scope = currentKey;
+            const scopeKeys = resolveTranslationKeys(currentTranslation);
+
+            // And build the key
+            const scopedKeys = scopeKeys.map(innerKey => `${scope}${KEY_SEPARATOR}${innerKey}`);
+
+            result = result.concat(scopedKeys);
+        } else if (typeof currentTranslation === "string") {
+            // Just push the the string value.
+            result.push(currentKey);
         }
     }
 
