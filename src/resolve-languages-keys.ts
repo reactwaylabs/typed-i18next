@@ -52,7 +52,7 @@ export async function resolveLanguageTranslations(language: string, location: st
     };
 }
 
-export async function extractTranslationsFromFile(fileName: string, location: string) {
+export async function extractTranslationsFromFile(fileName: string, location: string): Promise<string[]> {
     // Resolve translations namespace name.
     const namespaceName = path.removeExt(fileName, path.extname(fileName));
 
