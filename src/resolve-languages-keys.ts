@@ -24,7 +24,7 @@ export function resolveTranslationKeys(obj: Dict): string[] {
 }
 
 export async function resolveLanguageTranslations(langName: string, location: string): Promise<LanguageTranslations> {
-    const fileList = (await getListFilesRecursively(location)).map(x => path.relative(location, x));
+    const fileList = (await getListFilesRecursively(location)).map(x => path.toUnix(path.relative(location, x)));
 
     const keys = (await Promise.all(
         fileList.map<Promise<string[]>>(async fileName => {
