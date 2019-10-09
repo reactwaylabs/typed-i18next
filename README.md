@@ -1,6 +1,6 @@
 # typed-i18next
 
-Generating TypeScript types from translations.
+Type-safe translations generator for i18next.
 
 [![NPM version](https://img.shields.io/npm/v/typed-i18next.svg?logo=npm)](https://www.npmjs.com/package/typed-i18next)
 [![NPM version](https://img.shields.io/npm/v/typed-i18next/canary.svg?logo=npm)](https://www.npmjs.com/package/typed-i18next/v/canary)

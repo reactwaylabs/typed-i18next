@@ -1,7 +1,7 @@
 {
     "name": "typed-i18next",
     "version": "0.1.0",
-    "description": "Generating TypeScript types from translations.",
+    "description": "Type-safe translations generator for i18next.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
