@@ -1,7 +1,7 @@
 {
     "name": "typed-i18next",
     "version": "0.1.0",
-    "description": "Generating TypeScript types from translations.",
+    "description": "Type-safe translations generator for i18next.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -46,20 +46,11 @@
     },
     "dependencies": {
         "@types/fs-extra": "^8.0.0",
-        "@types/glob": "^7.1.1",
-        "@types/lodash.debounce": "^4.0.6",
-        "@types/lodash.get": "^4.4.6",
-        "@types/lodash.set": "^4.3.6",
         "chalk": "^2.4.2",
         "commander": "^3.0.2",
         "fs-extra": "^8.1.0",
-        "globs": "^0.1.4",
-        "lodash.debounce": "^4.0.8",
-        "lodash.get": "^4.4.2",
-        "lodash.set": "^4.3.2",
         "loglevel": "^1.6.4",
         "loglevel-plugin-prefix": "^0.8.4",
-        "pascal-case": "^2.0.1",
         "ts-morph": "^4.2.0",
         "upath": "^1.2.0"
     },
