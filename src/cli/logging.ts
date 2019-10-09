@@ -46,4 +46,4 @@ function appyMultilineText(logger: log.RootLogger): log.RootLogger {
 }
 
 export const Log = appyMultilineText(log);
-Log.setLevel(LogLevel.Silent);
+Log.setLevel(LogLevel.Info);
