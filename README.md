@@ -48,7 +48,7 @@ When generating TypeScript types:
 $ typed-i18next -i ./src/i18next/translations -o ./src/i18next/translations.d.ts
 ```
 
-In CI translation types can be check if they are up-to-date with `--check` flag:
+During CI, declaration file can be checked if they are up-to-date with `--check` flag:
 
 ```sh
 $ typed-i18next -i ./src/i18next/translations -o ./src/i18next/translations.d.ts --check
@@ -94,7 +94,7 @@ Example translations file structure:
             └── register.json
 ```
 
-## Types
+## Library specific types
 
 ### `react-i18next`
 
