@@ -62,12 +62,12 @@ $ typed-i18next -h
 
 ### Configuration
 
-| CLI Flag                       | Type                                                               | Description                                        | Default  |
-| ------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------- | -------- |
-| -i, --input \<path\>           | string                                                             | location where translations are located            |          |
-| -o, --outputFile \<file-path\> | string                                                             | location where to generate definitions file        |          |
-| --check [boolean]              | boolean                                                            | check if generated file up to date (useful for CI) | false    |
-| --logLevel \<level\>           | `"silent"`, `"error"`, `"warning"`, `"info"`, `"debug"`, `"trace"` | console log level                                  | `"info"` |
+| CLI Flag                       | Type                                                               | Description                                         | Default  |
+| ------------------------------ | ------------------------------------------------------------------ | --------------------------------------------------- | -------- |
+| -i, --input \<path\>           | string                                                             | Location where translations are located.            |          |
+| -o, --outputFile \<file-path\> | string                                                             | Location where to generate definitions file.        |          |
+| --check [boolean]              | boolean                                                            | Check if generated file up to date (useful for CI). | false    |
+| --logLevel \<level\>           | `"silent"`, `"error"`, `"warning"`, `"info"`, `"debug"`, `"trace"` | Console log level.                                  | `"info"` |
 
 ## Translation file structures
 
