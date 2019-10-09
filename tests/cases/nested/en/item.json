@@ -2,7 +2,10 @@
     "title": "Colors",
     "content": {
         "desc": "Color is color",
-        "example": "Blue is blue"
+        "example": "Blue is blue",
+        "another": {
+            "key": "value"
+        }
     },
     "footer": "That is all about colors"
 }

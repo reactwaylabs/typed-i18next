@@ -1,6 +1,6 @@
 import { Project, StructureKind, Writers } from "ts-morph";
 
-import { KEY_SEPARATOR } from "./constants";
+import { NAMESPACE_SEPARATOR } from "./constants";
 
 function resolveTypes(namespaceDictionary: { [key: string]: string[] }, keyWithNS: boolean = false): { [key: string]: string } {
     const result: { [key: string]: string } = {};
@@ -10,7 +10,7 @@ function resolveTypes(namespaceDictionary: { [key: string]: string[] }, keyWithN
 
         let keyPrefix: string;
         if (keyWithNS) {
-            keyPrefix = `${ns}${KEY_SEPARATOR}`;
+            keyPrefix = `${ns}${NAMESPACE_SEPARATOR}`;
         } else {
             keyPrefix = "";
         }
@@ -29,15 +29,13 @@ export function generateTypes(keys: string[]): string {
 
     for (const fullKey of keys) {
         // TODO: Optimize.
-        const namespaceAndKey = fullKey.split(KEY_SEPARATOR);
-        const key = namespaceAndKey[namespaceAndKey.length - 1];
-        const namespaces = namespaceAndKey.slice(0, namespaceAndKey.length - 1).join(KEY_SEPARATOR);
+        const [namespace, key] = fullKey.split(NAMESPACE_SEPARATOR);
 
-        if (namespaceDictionary[namespaces] == null) {
-            namespaceDictionary[namespaces] = [];
+        if (namespaceDictionary[namespace] == null) {
+            namespaceDictionary[namespace] = [];
         }
 
-        namespaceDictionary[namespaces].push(key);
+        namespaceDictionary[namespace].push(key);
     }
 
     const $interface = file.addInterface({

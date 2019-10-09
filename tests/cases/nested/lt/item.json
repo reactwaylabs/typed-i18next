@@ -1,8 +1,11 @@
 {
     "title": "Spalvos",
     "content": {
-        "desc": "Splava yra spalva",
-        "example": "Mėlyna yra mėlyna"
+        "desc": "Spalva yra spalva",
+        "example": "Mėlyna yra mėlyna",
+        "another": {
+            "key": "reikšmė"
+        }
     },
     "footer": "Štai ir viskas apie spalvas"
 }

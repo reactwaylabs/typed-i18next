@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`missing-translation-keys 1`] = `
+Array [
+  Object {
+    "language": "lt",
+    "translationKey": "tops:tank-top",
+  },
+  Object {
+    "language": "en",
+    "translationKey": "smth/authentication:login",
+  },
+  Object {
+    "language": "en",
+    "translationKey": "smth/authentication:register",
+  },
+]
+`;
