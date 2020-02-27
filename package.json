@@ -1,6 +1,6 @@
 {
     "name": "typed-i18next",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Type-safe translations generator for i18next.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
