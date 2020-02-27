@@ -37,7 +37,7 @@ export async function generateTypesFile({
     if (noEmitHeader) {
         header = "";
     } else {
-        header = `// DO NOT EDIT! This file is generated with "typed-18next" tool.\n\n`;
+        header = `/* eslint-disable */\n// DO NOT EDIT! This file is generated with "typed-18next" tool.\n\n`;
     }
 
     const typesFile = generateTypes(combinedKeys.translationKeys);
